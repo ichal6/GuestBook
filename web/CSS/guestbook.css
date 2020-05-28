@@ -1,0 +1,46 @@
+h1{
+    margin: 20px;
+}
+
+.sign-block{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    max-width: max-content;
+    margin: 20px;
+}
+
+.message, .name{
+    font-weight: bold;
+}
+
+.sign{
+    display: inline-block;
+}
+
+.sign-even{
+    background-color: #68a3ff;
+}
+
+#sign-to-guestbook{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    max-width: 500px;
+}
+
+#provide-name{
+    width: 200px;
+}
+
+#sign-to-guestbook > *{
+    margin-bottom: 15px;
+}
+
+#submit-btn{
+    width: max-content;
+}
+
+.sign > div{
+    margin: 5px;
+}

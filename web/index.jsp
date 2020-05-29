@@ -70,14 +70,15 @@
         </div>
       </div>
     </div>
-    <form id="sign-to-guestbook">
+    <form id="sign-to-guestbook" action="Servlet" method="POST">
       <label>Message:</label>
-      <textarea id="provide-message">
-
-      </textarea>
+      <textarea name="provide-message"></textarea>
       <label>Name:</label>
-      <input id="provide-name" type="text">
+      <input name="provide-name" type="text">
       <button id="submit-btn">Submit</button>
     </form>
+
+  <p>${message}</p>
+  <p>${name}</p>
   </body>
 </html>

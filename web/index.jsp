@@ -80,5 +80,6 @@
 
   <p>${message}</p>
   <p>${name}</p>
+  <p>${date}</p>
   </body>
 </html>

@@ -13,10 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @WebServlet("/Servlet")
 public class ServletGuestBook extends HttpServlet {
+
+    public static List<Sign> getAllSigns() throws IOException {
+        DAOInterface dao = new DAOdatabase("/home/michael/Dropbox/Codecool/Weekendowy/3.WEB/2nd_Sprint/1.Pre-Work/GuestBook/src/main/resources/database.properties");
+        return dao.getSigns();
+    }
+
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
@@ -28,7 +35,6 @@ public class ServletGuestBook extends HttpServlet {
 
         DAOInterface dao = new DAOdatabase("/home/michael/Dropbox/Codecool/Weekendowy/3.WEB/2nd_Sprint/1.Pre-Work/GuestBook/src/main/resources/database.properties");
         Sign newSign= new Sign(name ,actualDate, message);
-
 
         try {
             request.setAttribute("message", String.valueOf(message));

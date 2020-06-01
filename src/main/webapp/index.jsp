@@ -5,7 +5,9 @@
   Time: 5:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  import="Controller.ServletGuestBook"%>
+<%@ page import="Model.Sign" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,59 +18,24 @@
   <body>
     <h1>Guestbook:</h1>
     <div class="sign-block">
+      <% List<Sign> allSigns = ServletGuestBook.getAllSigns();
+        for(Sign oneSign :allSigns){
+      %>
       <div class="sign sign-even">
-        <div class="message">
-          This is the stupid content.
-        </div>
+        <div class="message"><%= oneSign.getMessage() %></div>
         <div class="info">
           <span>Name: </span>
-          <span class="name-content">
-            Mr. Bond
-          </span>
+          <span class="name-content"><%= oneSign.getName() %></span>
         </div>
         <div class="info">
           <span>Date: </span>
-          <span class="date-content">
-            28-05-2020
-          </span>
+          <span class="date-content"><%= oneSign.getDate() %></span>
         </div>
       </div>
+      <%
+        }
+      %>
 
-      <div class="sign">
-        <div class="message">
-          HSomething stupid text.
-        </div>
-        <div class="info">
-          <span>Name: </span>
-          <span class="name-content">
-            Mr. Łątka
-          </span>
-        </div>
-        <div class="info">
-          <span>Date: </span>
-          <span class="date-content">
-            31-05-2020
-          </span>
-        </div>
-      </div>
-
-      <div class="sign  sign-even">
-        <div class="message">
-          How how how!
-        </div>
-        <div class="info">
-          <span>Name: </span>
-          <span class="name-content">
-            Mr. Smith
-          </span>
-        </div>
-        <div class="info">
-          <span>Date: </span>
-          <span class="date-content">
-            29-05-2020
-          </span>
-        </div>
-      </div>
     </div>
     <form id="sign-to-guestbook" action="Servlet" method="POST">
       <label>Message:</label>

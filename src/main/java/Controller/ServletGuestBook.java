@@ -26,7 +26,7 @@ public class ServletGuestBook extends HttpServlet {
         String message = request.getParameter("provide-message");
         String name = request.getParameter("provide-name");
 
-        DAOInterface dao = new DAOdatabase("/home/michael/Dropbox/Codecool/Weekendowy/3.WEB/2nd_Sprint/1.Pre-Work/GuestBook/src/main/resources/database.properties");
+        DAOInterface dao = new DAOdatabase("src/main/resources/database.properties");
         Sign newSign= new Sign(name ,actualDate, actualTime, message);
         dao.addSign(newSign);
 

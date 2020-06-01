@@ -5,7 +5,8 @@
   Time: 5:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"  import="Controller.ServletGuestBook"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="Controller.ServletGuestBook"%>
 <%@ page import="Model.Sign" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
@@ -18,10 +19,25 @@
   <body>
     <h1>Guestbook:</h1>
     <div class="sign-block">
-      <% List<Sign> allSigns = ServletGuestBook.getAllSigns();
+      <%
+        int styleChange = 1;
+        List<Sign> allSigns = ServletGuestBook.getAllSigns();
+        if(allSigns.size() == 0){
+            %>
+      <p>The book is empty</p>
+      <%
+        }
         for(Sign oneSign :allSigns){
+            if(styleChange % 2 == 1){
       %>
       <div class="sign sign-even">
+        <%
+          }else{
+        %>
+      <div class="sign">
+        <%
+          }
+        %>
         <div class="message"><%= oneSign.getMessage() %></div>
         <div class="info">
           <span>Name: </span>
@@ -33,6 +49,7 @@
         </div>
       </div>
       <%
+        styleChange++;
         }
       %>
 
@@ -45,8 +62,5 @@
       <button id="submit-btn">Submit</button>
     </form>
 
-  <p>${message}</p>
-  <p>${name}</p>
-  <p>${date}</p>
   </body>
 </html>

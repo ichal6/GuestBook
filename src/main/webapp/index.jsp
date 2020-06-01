@@ -38,7 +38,7 @@
         </div>
         <div class="info">
           <span>Date: </span>
-          <span class="date-content"><%= oneSign.getDate() %></span>
+          <span class="date-content"><%= oneSign.getDate() %> <%=oneSign.getTime()%></span>
         </div>
       </div>
       <%

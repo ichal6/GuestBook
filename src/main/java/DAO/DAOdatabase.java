@@ -36,9 +36,10 @@ public class DAOdatabase implements DAOInterface {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
                 Date date = rs.getDate(3);
-                String message = rs.getString(4);
+                Time time = rs.getTime(4);
+                String message = rs.getString(5);
 
-                Sign sign = new Sign(id, name, date, message);
+                Sign sign = new Sign(id, name, date, time, message);
                 listOfSigns.add(sign);
                 con.close();
             }
@@ -66,13 +67,14 @@ public class DAOdatabase implements DAOInterface {
 
     @Override
     public void addSign(Sign sign) {
-        String AddNewSign = "INSERT INTO signs VALUES (DEFAULT, ?, ?, ?)";
+        String AddNewSign = "INSERT INTO signs VALUES (DEFAULT, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(AddNewSign))
         {
             pst.setString(1, sign.getName());
             pst.setDate(2, sign.getDate());
-            pst.setString(3, sign.getMessage());
+            pst.setTime(3, sign.getTime());
+            pst.setString(4, sign.getMessage());
             pst.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();

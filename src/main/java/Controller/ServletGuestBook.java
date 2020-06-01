@@ -19,11 +19,6 @@ import java.util.List;
 @WebServlet("/Servlet")
 public class ServletGuestBook extends HttpServlet {
 
-    public static List<Sign> getAllSigns() throws IOException {
-        DAOInterface dao = new DAOdatabase("/home/michael/Dropbox/Codecool/Weekendowy/3.WEB/2nd_Sprint/1.Pre-Work/GuestBook/src/main/resources/database.properties");
-        return dao.getSigns();
-    }
-
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)

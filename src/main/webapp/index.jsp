@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import="Controller.ServletGuestBook"%>
 <%@ page import="Model.Sign" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Model.ServiceSign" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +14,7 @@
     <div class="sign-block">
       <%
         int styleChange = 1;
-        List<Sign> allSigns = ServletGuestBook.getAllSigns();
+        List<Sign> allSigns = ServiceSign.getAllSigns();
         if(allSigns.size() == 0){
             %>
       <p>The book is empty</p>

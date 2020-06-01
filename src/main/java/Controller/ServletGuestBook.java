@@ -35,15 +35,10 @@ public class ServletGuestBook extends HttpServlet {
 
         DAOInterface dao = new DAOdatabase("/home/michael/Dropbox/Codecool/Weekendowy/3.WEB/2nd_Sprint/1.Pre-Work/GuestBook/src/main/resources/database.properties");
         Sign newSign= new Sign(name ,actualDate, message);
+        dao.addSign(newSign);
 
         try {
-            request.setAttribute("message", String.valueOf(message));
-            request.setAttribute("name", String.valueOf(name));
-            request.setAttribute("date", String.valueOf(actualDate));
-            dao.addSign(newSign);
-
-            response.setHeader("Test", "Success");
-
+            response.setHeader("Send", "Success");
 
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("index.jsp");

@@ -62,8 +62,5 @@
       <button id="submit-btn">Submit</button>
     </form>
 
-  <p>${message}</p>
-  <p>${name}</p>
-  <p>${date}</p>
   </body>
 </html>

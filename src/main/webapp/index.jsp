@@ -22,6 +22,11 @@
       <%
         int styleChange = 1;
         List<Sign> allSigns = ServletGuestBook.getAllSigns();
+        if(allSigns.size() == 0){
+            %>
+      <p>The book is empty</p>
+      <%
+        }
         for(Sign oneSign :allSigns){
             if(styleChange % 2 == 1){
       %>

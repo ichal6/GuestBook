@@ -27,13 +27,11 @@ public class DAOdatabase implements DAOInterface {
 
     @Override
     public List<Sign> getSigns() {
-        try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement pst = con.prepareStatement("select * from signs");
-             ResultSet rs = pst.executeQuery()) {
-            listOfSigns.clear();
-            int attributesNumber = rs.getMetaData().getColumnCount();
-            String[] adminAttributes = new String[attributesNumber];
+        try(Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pst = con.prepareStatement("select * from signs");
+            ResultSet rs = pst.executeQuery()) {
 
+            listOfSigns.clear();
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);
@@ -68,16 +66,16 @@ public class DAOdatabase implements DAOInterface {
 
     @Override
     public void addSign(Sign sign) {
-        String AddToUser_tableStatement = "INSERT INTO signs VALUES (DEFAULT, ?, ?, ?)";
+        String AddNewSign = "INSERT INTO signs VALUES (DEFAULT, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(url, user, password);
-             PreparedStatement pst = con.prepareStatement(AddToUser_tableStatement))
+             PreparedStatement pst = con.prepareStatement(AddNewSign))
         {
             pst.setString(1, sign.getName());
             pst.setDate(2, sign.getDate());
             pst.setString(3, sign.getMessage());
             pst.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 }

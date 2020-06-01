@@ -27,7 +27,7 @@ public class ServletGuestBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         LocalDate localDate = LocalDate.now();
         Date actualDate = Date.valueOf(localDate);
         String message = request.getParameter("provide-message");
@@ -46,9 +46,5 @@ public class ServletGuestBook extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("index.jsp");
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

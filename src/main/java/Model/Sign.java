@@ -15,6 +15,12 @@ public class Sign {
         this.message = message;
     }
 
+    public Sign(String name, Date date, String message) {
+        this.name = name;
+        this.date = date;
+        this.message = message;
+    }
+
     public String getName() {
         return name;
     }

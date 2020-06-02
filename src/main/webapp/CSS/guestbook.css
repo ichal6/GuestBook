@@ -44,3 +44,16 @@ h1{
 .sign > div{
     margin: 5px;
 }
+
+#switch-dark-mode{
+    position: fixed;
+    margin: 20px;
+    padding: 10px;
+    left: 50%;
+    top:0%;
+}
+
+.dark-mode,.dark-mode textarea, .dark-mode input {
+    background-color: #5e5756;
+    color: white;
+}

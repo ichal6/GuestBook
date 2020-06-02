@@ -41,7 +41,6 @@ public class DAOdatabase implements DAOInterface {
 
                 Sign sign = new Sign(id, name, date, time, message);
                 listOfSigns.add(sign);
-                con.close();
             }
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
@@ -51,18 +50,53 @@ public class DAOdatabase implements DAOInterface {
     }
 
     @Override
-    public Sign getSign(int id) {
+    public Sign getSign(int searchID) {
+        try(Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pst = con.prepareStatement("select * from signs WHERE id = ?")) {
+                pst.setInt(1, searchID);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()) {
+                    int id = rs.getInt(1);
+                    String name = rs.getString(2);
+                    Date date = rs.getDate(3);
+                    Time time = rs.getTime(4);
+                    String message = rs.getString(5);
+
+                    return new Sign(id, name, date, time, message);
+                }
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
         return null;
     }
 
     @Override
-    public void updateSign(Sign sign, int id) {
-
+    public void updateSign(Sign sign, int searchID) {
+        try(Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pst = con.prepareStatement("UPDATE signs SET name=?, date=?, time=?, message=? WHERE id = ?")) {
+                pst.setString(1, sign.getName());
+                pst.setDate(2, sign.getDate());
+                pst.setTime(3, sign.getTime());
+                pst.setString(4, sign.getMessage());
+                pst.setInt(5, searchID);
+                pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 
     @Override
-    public void deleteSign(int id) {
+    public void deleteSign(int searchID) {
+        try(Connection con = DriverManager.getConnection(url, user, password);
+            PreparedStatement pst = con.prepareStatement("DELETE FROM signs WHERE id = ?")){
+                pst.setInt(1, searchID);
+                pst.executeUpdate();
 
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override

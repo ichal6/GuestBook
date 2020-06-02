@@ -1,4 +1,4 @@
 function switchDarkMode() {
-    let element = document.body;
-    element.classList.toggle("dark-mode");
+    document.forms[0].action = "SwitchMode";
+    document.forms[0].submit();
 }

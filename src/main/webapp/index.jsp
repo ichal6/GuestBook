@@ -10,9 +10,9 @@
     <link rel="stylesheet" type="text/css" href="CSS/guestbook.css">
     <script type="text/javascript" src="JS/dark-mode.js"></script>
   </head>
-  <body>
+  <body ${mode}>
     <h1>Guestbook:</h1>
-    <button id="switch-dark-mode" onclick="switchDarkMode()">Toggle dark mode</button>
+    <button id="switch-dark-mode" name="switch-light-dark" onclick="switchDarkMode()">Toggle dark mode</button>
     <div class="sign-block">
       <%
         int styleChange = 1;

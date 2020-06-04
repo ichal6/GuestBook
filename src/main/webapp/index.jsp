@@ -2,6 +2,8 @@
 <%@ page import="Model.Sign" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Model.ServiceSign" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="DAO.ReadError" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,7 +18,14 @@
     <div class="sign-block">
       <%
         int styleChange = 1;
-        List<Sign> allSigns = ServiceSign.getAllSigns();
+        List<Sign> allSigns = null;
+        try{
+          allSigns = ServiceSign.getAllSigns();
+        }catch(IOException | ReadError ex){
+            %>
+      <p>Problem with connect with database</p>
+        <%
+        }
         if(allSigns.size() == 0){
             %>
       <p>The book is empty</p>

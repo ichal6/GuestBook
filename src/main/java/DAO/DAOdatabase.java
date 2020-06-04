@@ -26,7 +26,7 @@ public class DAOdatabase implements DAOInterface {
 
 
     @Override
-    public List<Sign> getSigns() {
+    public List<Sign> getSigns() throws ReadError {
         try(Connection con = DriverManager.getConnection(url, user, password);
             PreparedStatement pst = con.prepareStatement("select * from signs");
             ResultSet rs = pst.executeQuery()) {
@@ -45,12 +45,13 @@ public class DAOdatabase implements DAOInterface {
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ReadError("You cannot access to database");
         }
         return listOfSigns;
     }
 
     @Override
-    public Sign getSign(int searchID) {
+    public Sign getSign(int searchID) throws ReadError{
         try(Connection con = DriverManager.getConnection(url, user, password);
             PreparedStatement pst = con.prepareStatement("select * from signs WHERE id = ?")) {
                 pst.setInt(1, searchID);
@@ -67,12 +68,13 @@ public class DAOdatabase implements DAOInterface {
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ReadError("You cannot access to database");
         }
         return null;
     }
 
     @Override
-    public void updateSign(Sign sign, int searchID) {
+    public void updateSign(Sign sign, int searchID) throws ReadError{
         try(Connection con = DriverManager.getConnection(url, user, password);
             PreparedStatement pst = con.prepareStatement("UPDATE signs SET name=?, date=?, time=?, message=? WHERE id = ?")) {
                 pst.setString(1, sign.getName());
@@ -84,11 +86,12 @@ public class DAOdatabase implements DAOInterface {
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DAOdatabase.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ReadError("You cannot access to database");
         }
     }
 
     @Override
-    public void deleteSign(int searchID) {
+    public void deleteSign(int searchID) throws ReadError{
         try(Connection con = DriverManager.getConnection(url, user, password);
             PreparedStatement pst = con.prepareStatement("DELETE FROM signs WHERE id = ?")){
                 pst.setInt(1, searchID);
@@ -96,11 +99,12 @@ public class DAOdatabase implements DAOInterface {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            throw new ReadError("You cannot access to database");
         }
     }
 
     @Override
-    public void addSign(Sign sign) {
+    public void addSign(Sign sign) throws ReadError{
         String AddNewSign = "INSERT INTO signs VALUES (DEFAULT, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement(AddNewSign))
@@ -112,6 +116,7 @@ public class DAOdatabase implements DAOInterface {
             pst.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            throw new ReadError("You cannot access to database");
         }
     }
 }

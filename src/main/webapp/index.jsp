@@ -56,6 +56,6 @@
       <input name="provide-name" type="text">
       <button id="submit-btn">Submit</button>
     </form>
-
+        <p>${errorMessage}</p>
   </body>
 </html>

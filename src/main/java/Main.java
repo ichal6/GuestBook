@@ -16,14 +16,18 @@ public class Main {
             DAOInterface dao = new DAOdatabase("src/main/resources/database.properties");
             Sign newSign= new Sign(1,"Michał Lechowicz",date, time,"Przykładowy tekst");
             //dao.addSign(newSign);
-            System.out.println(dao.getSigns().get(0).getId());
-            System.out.println(dao.getSigns().get(0).getName());
-            System.out.println(dao.getSigns().get(0).getDate());
-            System.out.println(dao.getSigns().get(0).getTime());
-            System.out.println(dao.getSigns().get(0).getMessage());
-            //dao.deleteSign(10);
-            //dao.updateSign(newSign, 6);
-            System.out.println(dao.getSign(5).getName());
+            try {
+                System.out.println(dao.getSigns().get(0).getId());
+                System.out.println(dao.getSigns().get(0).getName());
+                System.out.println(dao.getSigns().get(0).getDate());
+                System.out.println(dao.getSigns().get(0).getTime());
+                System.out.println(dao.getSigns().get(0).getMessage());
+                //dao.deleteSign(10);
+                //dao.updateSign(newSign, 6);
+                System.out.println(dao.getSign(5).getName());
+            }catch(Exception ex){
+                
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

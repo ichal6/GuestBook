@@ -5,6 +5,7 @@ import DAO.DAOdatabase;
 import Model.Sign;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ public class ServletGuestBook extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         java.sql.Date actualDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         java.sql.Time actualTime = java.sql.Time.valueOf(LocalTime.now());
         String message = request.getParameter("provide-message");
@@ -42,13 +43,10 @@ public class ServletGuestBook extends HttpServlet {
             }
         }
 
-        try {
-            response.setHeader("Send", "Success");
-            RequestDispatcher dispatcher
-                    = request.getRequestDispatcher("index.jsp");
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            response.sendRedirect("index.jsp");
-        }
+
+        response.setHeader("Send", "Success");
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("index.jsp");
+        dispatcher.forward(request, response);
     }
 }
